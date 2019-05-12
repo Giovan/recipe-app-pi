@@ -6,5 +6,13 @@ services:
       context: .
     ports:
       - "8000:9092"
+    volumes:
+      - ./app:/app
     command:
       sh -c "python3 manage.py runserver 0.0.0.0:9092"
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=supersecretpassword
